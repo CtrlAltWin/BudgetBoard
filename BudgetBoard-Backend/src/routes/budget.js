@@ -5,7 +5,7 @@ const budgetRouter = express.Router();
 const { validateBudget } = require("../utils/validation");
 
 budgetRouter.get(
-  "/api/analytics/budget/view",
+  "/api/budget/view",
   authenticateUser,
   async (req, res) => {
     try {

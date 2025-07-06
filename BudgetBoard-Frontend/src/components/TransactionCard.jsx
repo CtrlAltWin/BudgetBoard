@@ -9,39 +9,45 @@ const TransactionCard = ({ transaction, setToBeDeleted }) => {
   });
 
   return (
-    <div className="bg-white p-6 border border-gray-200 text-gray-700 rounded-lg space-y-1 hover:shadow duration-300 ease-in-out">
-      <div className="flex justify-between items-center">
-        <h2 className="font-semibold text-lg overflow-hidden text-ellipsis whitespace-nowrap text-gray-700">
-          {transaction.title}
-        </h2>
-        <span className="text-sm">{formattedDate}</span>
+    <div className="bg-white p-5 text-gray-700 h-72 rounded-lg shadow hover:shadow duration-200 ease-in-out">
+      <div className="grid grid-cols-[9fr_3fr] gap-2 items-start">
+        <div className="space-y-2">
+          <h2 className="font-semibold text-lg truncate">
+            {transaction.title}
+          </h2>
+
+          {transaction.description && (
+            <p className="text-sm text-gray-600">{transaction.description}</p>
+          )}
+
+          {transaction.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {transaction.tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="px-2 py-[3px] text-xs font-semibold rounded-full border text-violet-400"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="text-right space-y-1">
+          <p className="text-xl font-semibold text-violet-500">
+            ₹ {transaction.amount.toLocaleString()}
+          </p>
+          <span className="text-xs text-gray-500">{formattedDate}</span>
+        </div>
       </div>
 
-      <p className="font-medium text-md">
-        ₹ {transaction.amount.toLocaleString()} /-
-      </p>
-
-      {transaction.description && (
-        <p>{transaction.description}</p>
-      )}
-
-      <div className="flex flex-wrap gap-2 pt-2">
-        {transaction.tags.map((tag, index) => (
-          <div
-            key={index}
-            className="px-2 py-[2px] text-xs font-semibold border rounded-full text-violet-600 bg-violet-100"
-          >
-            {tag}
-          </div>
-        ))}
-      </div>
-
-      <div className="flex justify-between items-center border-t border-gray-300 pt-3 mt-3">
-        <p className="px-2 py-[3px] text-xs text-gray-600 font-semibold rounded-full bg-gray-100 border border-gray-200">
+      <div className="flex justify-between items-center border-t border-gray-200 pt-3 mt-3">
+        <span className="px-3 py-[2px] text-xs bg-gray-100 border border-gray-200 rounded-full text-gray-600 font-semibold capitalize">
           {transaction.category}
-        </p>
+        </span>
         <button
-          className="text-red-500 text-sm px-3 py-1 font-medium border border-red-300 rounded-md hover:bg-red-50"
+          className="px-3 py-[5px] text-xs font-semibold border rounded-md text-gray-600 border-gray-300 hover:bg-gray-50 hover:scale-110 transition-transform duration-200 ease-out"
           onClick={() => setToBeDeleted(transaction._id)}
         >
           Delete

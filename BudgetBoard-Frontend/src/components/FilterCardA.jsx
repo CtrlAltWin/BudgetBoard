@@ -10,7 +10,7 @@ const FilterCardA = ({ title, tags, filter, setFilter }) => {
             return (
               <button
                 key={index}
-                className={`px-2 py-[2px] m-1 border border-violet-400 rounded-full text-xs font-semibold bg-violet-200 hover:bg-violet-400 text-violet-500 hover:text-white duration-150 ease-in ${
+                className={`px-2 py-[2px] m-1 border border-violet-400 rounded-full text-xs font-semibold hover:bg-violet-400 text-violet-500 hover:text-white duration-150 ease-in ${
                   filter.tags.includes(tag) &&
                   "bg-violet-400 hover:bg-violet-400 text-white"
                 }`}

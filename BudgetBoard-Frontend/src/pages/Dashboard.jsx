@@ -8,12 +8,12 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import AuthContext from "../../utils/AuthContext";
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer";
 
+import Shimmer from "../components/Shimmer";
 const baseURL = import.meta.env.VITE_API_URL;
 
 const Dashboard = () => {
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [toBeDeleted, setToBeDeleted] = useState(null);
   const [filter, setFilter] = useState({
@@ -95,14 +95,16 @@ const Dashboard = () => {
     fetchTransactions();
   }, [filter]);
 
+  if (!transactions) return <Shimmer />;
+
   return (
     <div className="bg-gray-50 mt-1 min-h-[calc(100vh-64px)] px-4">
-      <div className="pt-9 space-y-2 max-w-[1370px] mx-auto">
+      <div className="pt-9 space-y-2 max-w-[1340px] mx-auto">
         <h1 className="font-bold text-3xl">My Transactions</h1>
         <p className="text-gray-700">Manage and organize your transactions</p>
       </div>
 
-      <div className="mt-6 max-w-[1370px] grid grid-cols-1 md:grid-cols-[3fr_1fr] space-y-4 w-full mx-auto">
+      <div className="mt-6 max-w-[1300px] grid grid-cols-1 md:grid-cols-[3fr_1fr] space-y-4 w-full mx-auto">
         <div className="max-w-md">
           <input
             type="text"
@@ -123,8 +125,8 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_3fr] max-w-[1370px] mx-auto py-3 lg:space-x-6 space-y-6">
-        <div className="space-y-4">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_3fr] max-w-[1300px] mx-auto py-3 lg:space-x-6 space-y-6">
+        <div className="sticky top-4 space-y-4 h-fit">
           <FilterCardA
             title={"Filter by Tag"}
             tags={getUniqueTags()}

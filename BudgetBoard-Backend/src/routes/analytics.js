@@ -1,8 +1,9 @@
 const express = require("express");
 const { authenticateUser } = require("../middlewares/authenticateUser");
 const Transaction = require("../models/transaction");
-const { MONTH } = require("../utils/constants");
+const { MONTH, ALLOWED_CATEGORY } = require("../utils/constants");
 const analyticsRouter = express.Router();
+
 
 analyticsRouter.get(
   "/api/analytics/category-wise-spending",
@@ -14,13 +15,19 @@ analyticsRouter.get(
       if (isNaN(days) || days <= 0) {
         days = 30;
       }
-      const categoryWiseSpending = {};
       const transactions = await Transaction.find({
         userId,
         createdAt: {
-          $gte: new Date(Date.currDate() - days * 24 * 60 * 60 * 1000),
+          $gte: new Date(Date.now() - days * 24 * 60 * 60 * 1000),
         },
       });
+
+      const categoryWiseSpending = {};
+
+      ALLOWED_CATEGORY.forEach((category) => {
+        categoryWiseSpending[category] = 0;
+      });
+
       transactions.forEach((transaction) => {
         if (transaction.category in categoryWiseSpending) {
           categoryWiseSpending[transaction.category] += transaction.amount;
@@ -28,10 +35,20 @@ analyticsRouter.get(
           categoryWiseSpending[transaction.category] = transaction.amount;
         }
       });
-      res.json(categoryWiseSpending);
+
+      const formattedData = Object.entries(categoryWiseSpending).map((arr) => {
+        return {
+          category: arr[0],
+          spending: arr[1],
+        };
+      });
+      res.json({
+        message: "Category wise spending",
+        categoryWiseSpending: formattedData,
+      });
     } catch (err) {
       res.status(400).json({
-        Error: "Error finding category wise spending",
+        Error: err.message || "Error finding category wise spending",
       });
     }
   }
@@ -68,14 +85,19 @@ analyticsRouter.get(
           monthlySpending[key] += transaction.amount;
         }
       });
-
+      const formattedData = Object.entries(monthlySpending).map((arr) => {
+        return {
+          month: arr[0],
+          spending: arr[1],
+        };
+      });
       res.json({
         message: "Monthly spending (last 12 months)",
-        monthlySpending,
+        monthlySpending: formattedData,
       });
     } catch (err) {
       res.status(400).json({
-        Error: "Error finding monthly spending",
+        Error: err.message || "Error finding monthly spending",
       });
     }
   }

@@ -22,7 +22,7 @@ const TransactionContainer = ({
           </button>
         </div>
       ) : (
-        <div className="min-h-72 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="min-h-72 grid grid-cols-1 gap-4">
           {transactions.map((transaction, index) => (
             <TransactionCard
               key={index}

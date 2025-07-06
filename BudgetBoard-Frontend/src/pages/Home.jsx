@@ -72,9 +72,9 @@ const Home = () => {
                 earnings.
               </p>
               <div className="flex space-x-2">
-                <Tag name={"Work"} />
-                <Tag name={"Learning"} />
-                <Tag name={"Personal"} />
+                <Tag name={"Shopping"} />
+                <Tag name={"Bills"} />
+                <Tag name={"Savings"} />
               </div>
             </div>
             <div className="order-1 md:order-2 px-2">

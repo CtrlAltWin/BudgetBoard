@@ -55,7 +55,7 @@ const Navbar = () => {
           {/* Logout Button */}
           {loggedInUser && (
             <div
-              className="text-gray-500 hover:bg-gray-50 py-2 px-4 rounded-lg border border-gray-200 cursor-pointer"
+              className="text-gray-500 hover:bg-gray-100 py-2 px-4 rounded-lg cursor-pointer"
               onClick={handleLogout}
             >
               <svg
@@ -80,6 +80,9 @@ const Navbar = () => {
             </Link>
             <Link to={"/dashboard"}>
               <li className="px-4 py-2 hover:bg-gray-100">Dashboard</li>
+            </Link>
+            <Link to={"/analytics"}>
+              <li className="px-4 py-2 hover:bg-gray-100">Analytics</li>
             </Link>
           </ul>
         </div>

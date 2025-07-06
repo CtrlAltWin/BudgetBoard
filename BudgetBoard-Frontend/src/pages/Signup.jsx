@@ -38,10 +38,10 @@ const Signup = () => {
       >
         <div className="mb-4 py-4 border-b border-gray-200">
           <h1 className="text-xl font-bold text-center mb-1">
-            Welcome to BookmarkHub
+            Welcome to BudgetBoard
           </h1>
           <p className="text-center text-gray-700">
-            Organize your web, simply and beautifully
+            Organize your transactions, simply and beautifully
           </p>
         </div>
 

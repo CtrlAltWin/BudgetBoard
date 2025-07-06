@@ -1,10 +1,10 @@
 import axios from "axios";
-import React, { useContext, useEffect } from "react";
-import { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import AuthContext from "../../utils/AuthContext";
+
 const baseURL = import.meta.env.VITE_API_URL;
 
 const Login = () => {
@@ -14,8 +14,10 @@ const Login = () => {
     email: "",
     password: "",
   });
+
   const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
   const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -29,16 +31,26 @@ const Login = () => {
       toast.success("Login successful!");
     } catch (err) {
       toast.error("Login Failed");
-      setError(err.response?.data?.error);
+      setError(err.response?.data?.error || "Invalid credentials");
     } finally {
       setIsLoading(false);
     }
   };
+
+  const fillDemoCredentials = () => {
+    setFormData({
+      email: "demo1234@gmail.com",
+      password: "Demo@1234",
+    });
+    toast.success("Demo credentials filled!");
+  };
+
   useEffect(() => {
     if (loggedInUser) {
       navigate("/dashboard");
     }
   }, [loggedInUser]);
+
   return (
     <div className="flex items-center justify-center mt-1 min-h-[calc(100vh-64px)] bg-gray-50 w-full">
       <form
@@ -47,10 +59,10 @@ const Login = () => {
       >
         <div className="mb-4 py-4 border-b border-gray-200">
           <h1 className="text-xl font-bold text-center mb-1">
-            Welcome to BookmarkHub
+            Welcome to BudgetBoard
           </h1>
           <p className="text-center text-gray-700">
-            Organize your web, simply and beautifully
+            Organize your transactions, simply and beautifully
           </p>
         </div>
 
@@ -70,7 +82,7 @@ const Login = () => {
           />
         </div>
 
-        <div className="mb-10">
+        <div className="mb-6">
           <label className="block mb-2 font-semibold text-sm">Password</label>
           <input
             type="password"
@@ -84,20 +96,29 @@ const Login = () => {
           />
         </div>
 
-        {error && <p className="px-1 mb-2 text-red-600">{error}</p>}
+        {error && <p className="px-1 mb-4 text-red-600 text-sm">{error}</p>}
 
-        <div className="mb-8">
+        <div className="mb-6 space-y-4">
           <button
             type="submit"
-            className="w-full mb-8 bg-violet-500 hover:bg-violet-400 font-semibold text-sm text-white py-3 rounded-lg transition"
+            className="w-full bg-violet-500 hover:bg-violet-400 font-semibold text-sm text-white py-3 rounded-lg transition"
           >
             Log In
           </button>
+
+          <button
+            type="button"
+            onClick={fillDemoCredentials}
+            className="w-full border border-gray-300 hover:bg-gray-100 text-sm font-semibold py-3 rounded-lg transition"
+          >
+            Use Demo Account
+          </button>
+
           {isLoading && <Spinner />}
         </div>
 
         <p className="text-center text-gray-700">
-          Not a user? <Link to={"/signup"}>Signup</Link>
+          Not a user? <Link to={"/signup"} className="text-violet-500">Signup</Link>
         </p>
       </form>
     </div>
@@ -105,3 +126,4 @@ const Login = () => {
 };
 
 export default Login;
+

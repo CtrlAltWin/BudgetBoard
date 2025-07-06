@@ -2,7 +2,7 @@ import React from "react";
 
 const Tag = ({ name }) => {
   return (
-    <div className="text-sm text-violet-500 bg-violet-200 px-2 py-1 rounded-3xl">
+    <div className="text-sm text-violet-400 bg-violet-200 px-3 py-2 rounded-3xl">
       {name}
     </div>
   );
