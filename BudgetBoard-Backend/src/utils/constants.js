@@ -11,6 +11,22 @@ const ALLOWED_CATEGORY = [
   "Other",
 ];
 
+const MONTH = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
 module.exports = {
   ALLOWED_CATEGORY,
+  MONTH,
 };

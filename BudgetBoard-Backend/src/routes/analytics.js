@@ -1,7 +1,7 @@
 const express = require("express");
 const { authenticateUser } = require("../middlewares/authenticateUser");
 const Transaction = require("../models/transaction");
-const { ALLOWED_CATEGORY } = require("../utils/constants");
+const { MONTH } = require("../utils/constants");
 const analyticsRouter = express.Router();
 
 analyticsRouter.get(
@@ -17,7 +17,9 @@ analyticsRouter.get(
       const categoryWiseSpending = {};
       const transactions = await Transaction.find({
         userId,
-        createdAt: { $gte: new Date(Date.now() - days * 24 * 60 * 60 * 1000) },
+        createdAt: {
+          $gte: new Date(Date.currDate() - days * 24 * 60 * 60 * 1000),
+        },
       });
       transactions.forEach((transaction) => {
         if (transaction.category in categoryWiseSpending) {
@@ -30,6 +32,50 @@ analyticsRouter.get(
     } catch (err) {
       res.status(400).json({
         Error: "Error finding category wise spending",
+      });
+    }
+  }
+);
+
+analyticsRouter.get(
+  "/api/analytics/monthly-spending",
+  authenticateUser,
+  async (req, res) => {
+    try {
+      const userId = req.user._id;
+
+      const transactions = await Transaction.find({
+        userId,
+        createdAt: {
+          $gte: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000),
+        },
+      });
+
+      const monthlySpending = {};
+
+      const now = new Date();
+      for (let i = 11; i >= 0; i--) {
+        const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+        const key = `${MONTH[d.getMonth()]} ${d.getFullYear()}`;
+        monthlySpending[key] = 0;
+      }
+
+      transactions.forEach((transaction) => {
+        const date = transaction.createdAt;
+        const key = `${MONTH[date.getMonth()]} ${date.getFullYear()}`;
+
+        if (monthlySpending[key] !== undefined) {
+          monthlySpending[key] += transaction.amount;
+        }
+      });
+
+      res.json({
+        message: "Monthly spending (last 12 months)",
+        monthlySpending,
+      });
+    } catch (err) {
+      res.status(400).json({
+        Error: "Error finding monthly spending",
       });
     }
   }

@@ -7,6 +7,7 @@ import Signup from "./pages/Signup.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Login from "./pages/Login.jsx";
 import Home from "./pages/Home.jsx";
+import Analytics from "./pages/Analytics.jsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/analytics",
+        element: <Analytics />,
       },
     ],
   },

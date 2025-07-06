@@ -30,10 +30,11 @@ const Navbar = () => {
           <h1 className="text-violet-400 text-xl"> BudgetBoard</h1>
         </div>
 
-        <div className="flex gap-8 justify-end items-center h-full text-sm mx-4">
+        <div className="flex gap-8 justify-end items-center h-full text-sm mx-2">
           <div className="hidden sm:flex gap-8">
             <Link to={"/"}>Home</Link>
             <Link to={"/dashboard"}>Dashboard</Link>
+            <Link to={"/analytics"}>Analytics</Link>
           </div>
 
           {/* Mobile Menu Button */}

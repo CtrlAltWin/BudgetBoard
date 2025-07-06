@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import AuthContext from "../../utils/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const baseURL = import.meta.env.VITE_API_URL;
 
