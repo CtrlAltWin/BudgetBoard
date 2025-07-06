@@ -126,7 +126,7 @@ const Dashboard = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_3fr] max-w-[1300px] mx-auto py-3 lg:space-x-6 space-y-6">
-        <div className="sticky top-4 space-y-4 h-fit">
+        <div className="lg:sticky lg:top-4 space-y-4 h-fit">
           <FilterCardA
             title={"Filter by Tag"}
             tags={getUniqueTags()}
