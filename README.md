@@ -38,7 +38,7 @@
 |--------------|-----------------------------------------|
 | Pie Chart    | Category-wise expenses breakdown        |
 | Line Chart   | Monthly spending                        |
-| Bar Chart    | Budget vs Actual                        |
+| Bar Chart    | Budget vs Actual (not done yet)         |
 
 
 ## Basic Folder Structure
@@ -53,9 +53,9 @@
  ┃ ┣ 📜 main.jsx    # React root file
  ┣ 📜 .env          # Environment file
  ┣ 📜 package.json  # Dependencies & scripts
- 📂 BudgetBoard - Frontend
+ 📂 BudgetBoard - Backend
  ┣ 📂 src
- ┃ ┣ 📂 config  # Reusable UI components
+ ┃ ┣ 📂 config      # Configurations - DB, etc
  ┃ ┣ 📂 middlewares # Middlewares
  ┃ ┣ 📂 models      # Shcema and models
  ┃ ┣ 📂 routs       # Route files
@@ -63,6 +63,7 @@
  ┃ ┣ 📜 App.jsx     # Express server
  ┣ 📜 .env          # Environment file
  ┣ 📜 package.json  # Dependencies & scripts
+ 📜 Readme.md       # Project documentation
 ```
 
 
