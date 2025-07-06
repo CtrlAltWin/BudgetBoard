@@ -3,7 +3,6 @@ import React from "react";
 const Shimmer = () => {
   return (
     <div className="bg-gray-50 mt-1 min-h-[calc(100vh-64px)] px-4">
-      
       {/* Header Section */}
       <section className="py-9 space-y-2 max-w-[1340px] mx-auto animate-pulse">
         <div className="h-8 bg-gray-200 rounded w-56"></div>
@@ -17,7 +16,6 @@ const Shimmer = () => {
 
       {/* Pie Chart + Category Cards */}
       <section className="bg-white grid md:grid-cols-[4fr_5fr] gap-4 mt-9 pt-5 px-4 max-w-[1300px] border border-gray-200 mx-auto animate-pulse">
-        
         {/* Left Side Cards */}
         <div className="flex flex-col gap-3">
           {[...Array(4)].map((_, idx) => (
@@ -25,10 +23,7 @@ const Shimmer = () => {
           ))}
         </div>
 
-        {/* Right Side Pie Chart */}
-        <div className="flex justify-center items-center h-80">
-          <div className="h-40 w-40 rounded-full bg-gray-100"></div>
-        </div>
+        <div className="flex justify-center items-center h-80"></div>
       </section>
     </div>
   );
